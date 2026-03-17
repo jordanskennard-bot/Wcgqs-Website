@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Soccer Trophy Quiz Cup - The Beautiful Party Game</title>
+    <meta name="description" content="The ultimate football quiz party game. 8 players, hilarious rounds, epic banter. Buy now for £10.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0a1628;
+            --dark-blue: #1a2b4a;
+            --blue: #2a4070;
+            --cyan: #4dd4e8;
+            --yellow: #ffc629;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: var(--navy);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 22, 40, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(77, 212, 232, 0.2);
+            padding: 0 2rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.75);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--cyan);
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                gap: 1.2rem;
+            }
+            .nav-links a {
+                font-size: 0.95rem;
+            }
+        }
+
+        .play-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.1em;
+            color: var(--white);
+            background: transparent;
+            border: 2px solid var(--cyan);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            background: rgba(77, 212, 232, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(77, 212, 232, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+            padding-top: 80px;
+        }
+
+        /* MOTD-style diagonal stripes */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                var(--dark-blue) 0%, 
+                var(--blue) 50%, 
+                var(--navy) 100%);
+            opacity: 0.4;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 100px,
+                    rgba(77, 212, 232, 0.03) 100px,
+                    rgba(77, 212, 232, 0.03) 200px
+                );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 
+                0 0 20px rgba(77, 212, 232, 0.5),
+                4px 4px 0px var(--cyan);
+        }
+
+        .logo-line-1 {
+            color: var(--white);
+            display: block;
+        }
+
+        .logo-line-2 {
+            color: var(--yellow);
+            display: block;
+            text-shadow: 
+                0 0 20px rgba(255, 198, 41, 0.5),
+                4px 4px 0px rgba(255, 198, 41, 0.8);
+        }
+
+        .tagline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--cyan);
+            letter-spacing: 0.15em;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.5rem 4rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 0.1em;
+            color: var(--navy);
+            background: linear-gradient(135deg, var(--cyan), var(--yellow));
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 10px 30px rgba(77, 212, 232, 0.3),
+                0 0 0 0 rgba(77, 212, 232, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(77, 212, 232, 0.5),
+                0 0 0 8px rgba(77, 212, 232, 0.2);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 
+                    0 10px 30px rgba(77, 212, 232, 0.3),
+                    0 0 0 0 rgba(77, 212, 232, 0.4);
+            }
+            50% {
+                box-shadow: 
+                    0 10px 30px rgba(77, 212, 232, 0.3),
+                    0 0 0 12px rgba(77, 212, 232, 0);
+            }
+        }
+
+        /* Features Section */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-dark {
+            background: linear-gradient(180deg, var(--navy) 0%, var(--dark-blue) 100%);
+        }
+
+        .section-light {
+            background: var(--dark-blue);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            letter-spacing: 0.1em;
+            background: linear-gradient(135deg, var(--cyan), var(--yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature {
+            background: rgba(26, 43, 74, 0.5);
+            border: 2px solid rgba(77, 212, 232, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cyan), var(--yellow));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyan);
+            box-shadow: 0 10px 30px rgba(77, 212, 232, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--cyan);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .feature-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+
+        /* How It Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: var(--yellow);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--cyan);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .step-text {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Pricing */
+        .pricing-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--dark-blue), var(--blue));
+            border: 3px solid var(--yellow);
+            border-radius: 30px;
+            padding: 4rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(77, 212, 232, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .price {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 6rem;
+            color: var(--yellow);
+            line-height: 1;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .price-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 3rem;
+            text-align: left;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-list li {
+            padding: 0.75rem 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .features-list li::before {
+            content: '⚽';
+            position: absolute;
+            left: 0;
+            color: var(--cyan);
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: rgba(26, 43, 74, 0.3);
+            border-left: 4px solid var(--cyan);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .faq-question {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--yellow);
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .faq-answer {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 4px solid var(--cyan);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--cyan);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--yellow);
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* MOTD-style accent bars */
+        .accent-bars {
+            display: flex;
+            height: 10px;
+            margin-top: 2rem;
+        }
+
+        .accent-bars div {
+            flex: 1;
+        }
+
+        .bar-yellow { background: var(--yellow); }
+        .bar-cyan { background: var(--cyan); }
+        .bar-blue { background: var(--dark-blue); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 80vh;
+            }
+
+            .section {
+                padding: 4rem 1.5rem;
+            }
+
+            .cta-button {
+                padding: 1.2rem 3rem;
+                font-size: 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .pricing-card {
+                padding: 3rem 2rem;
+            }
+
+            .price {
+                font-size: 4rem;
+            }
+        }
+
+        /* Scroll animations */
+        @media (prefers-reduced-motion: no-preference) {
+            .fade-in-up {
+                opacity: 0;
+                transform: translateY(30px);
+                animation: fadeInUp 0.8s ease-out forwards;
+            }
+
+            .feature:nth-child(1) { animation-delay: 0.1s; }
+            .feature:nth-child(2) { animation-delay: 0.2s; }
+            .feature:nth-child(3) { animation-delay: 0.3s; }
+            .feature:nth-child(4) { animation-delay: 0.4s; }
+            .feature:nth-child(5) { animation-delay: 0.5s; }
+            .feature:nth-child(6) { animation-delay: 0.6s; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Nav -->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#whats-included">What's Included</a></li>
+            <li><a href="#pricing">Buy Now</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="logo">
+                <span class="logo-line-1">GLOBAL SOCCER</span>
+                <span class="logo-line-2">TROPHY QUIZ CUP</span>
+            </h1>
+            <p class="tagline">The Beautiful Party Game</p>
+            <a href="https://shop.foulplay.games" class="cta-button">🎮 BUY NOW - £10</a>
+            <br><br>
+            <a href="https://play.foulplay.games/host-complete_42.html" class="play-button">⚽ PLAY NOW</a>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Host Opens Game</h3>
+                    <p class="step-text">Open foulplay.games on laptop, tablet, or TV. Enter your unique game code.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Players Join</h3>
+                    <p class="step-text">Everyone scans QR code or visits link on their phones. No app download needed!</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Play & Laugh</h3>
+                    <p class="step-text">Compete in hilarious rounds of quizzes, puns, and physical challenges!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How many players can play?</h3>
+                <p class="faq-answer">3+ players (works best with 6-8)</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What devices do I need?</h3>
+                <p class="faq-answer">One host device (laptop/tablet/TV) plus smartphones for each player</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Do I need to download an app?</h3>
+                <p class="faq-answer">Nope! Everything works in your web browser</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Can I play multiple times?</h3>
+                <p class="faq-answer">Yes! Unlimited replays with your game code</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What if I have technical issues?</h3>
+                <p class="faq-answer">Email hello@foulplay.games - we respond within 24 hours</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Is there a refund policy?</h3>
+                <p class="faq-answer">Yes! 30-day money-back guarantee if you're not happy</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="whats-included" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">What's Included</h2>
+            <div class="features-grid">
+                <div class="feature fade-in-up">
+                    <div class="feature-icon">👥</div>
+                    <h3 class="feature-title">3+ Players</h3>
+                    <p class="feature-text">Perfect for house parties and pre-match gatherings</p>
+                </div>
+                <div class="feature fade-in-up">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">No App Needed</h3>
+                    <p class="feature-text">Works in your web browser on any device</p>
+                </div>
+                <div class="feature fade-in-up">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Hilarious Rounds</h3>
+                    <p class="feature-text">Quizzes, puns, photos, and physical challenges</p>
+                </div>
+                <div class="feature fade-in-up">
+                    <div class="feature-icon">♾️</div>
+                    <h3 class="feature-title">Unlimited Plays</h3>
+                    <p class="feature-text">One payment, play forever</p>
+                </div>
+                <div class="feature fade-in-up">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Instant Access</h3>
+                    <p class="feature-text">Get your code via email immediately</p>
+                </div>
+                <div class="feature fade-in-up">
+                    <div class="feature-icon">🆓</div>
+                    <h3 class="feature-title">Free Updates</h3>
+                    <p class="feature-text">New rounds and features added regularly</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="section section-light">
+        <div class="container">
+            <h2 class="section-title">Ready to Play?</h2>
+            <div class="pricing-card">
+                <div class="price">£10</div>
+                <p class="price-text">One-time payment. Unlimited plays.</p>
+                <ul class="features-list">
+                    <li>Instant game code</li>
+                    <li>Full access to all rounds</li>
+                    <li>Play forever</li>
+                    <li>Free updates included</li>
+                    <li>No subscription required</li>
+                </ul>
+                <a href="https://shop.foulplay.games" class="cta-button">🎮 GET IT NOW</a>
+                <p class="price-text" style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7;">30-day money-back guarantee</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="mailto:hello@foulplay.games">Contact</a>
+            <a href="#faq">FAQ</a>
+            <a href="https://shop.foulplay.games">Buy Now</a>
+        </div>
+        <p class="footer-text">© 2025 Global Soccer Trophy Quiz Cup. All rights reserved.</p>
+        <p class="footer-text">hello@foulplay.games</p>
+        <div class="accent-bars">
+            <div class="bar-yellow"></div>
+            <div class="bar-cyan"></div>
+            <div class="bar-blue"></div>
+            <div class="bar-cyan"></div>
+        </div>
+    </footer>
+</body>
+</html>
