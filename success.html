@@ -175,7 +175,7 @@
                 📧 We've also sent this code to your email. Check your inbox (and spam folder just in case)!
             </div>
 
-            <a href="https://play.foulplay.games/host-complete_42.html" class="play-button">🎮 Start Playing Now</a>
+            <a href="https://play.foulplay.games/host-complete_42.html" class="play-button" id="play-btn">🎮 Start Playing Now</a>
         </div>
     </div>
 
@@ -194,6 +194,9 @@
                     if (data.code) {
                         codeEl.textContent = data.code;
                         codeEl.classList.remove('loading');
+                        // Update play button URL to include the game code
+                        const playBtn = document.getElementById('play-btn');
+                        playBtn.href = `https://play.foulplay.games/host-complete_42.html?code=${encodeURIComponent(data.code)}`;
                         return;
                     }
 
