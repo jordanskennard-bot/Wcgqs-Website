@@ -6,11 +6,20 @@
     <title>Global Soccer Trophy Quiz Cup - The Beautiful Party Game</title>
     <meta name="description" content="The ultimate football quiz party game. 8 players, hilarious rounds, epic banter. Buy now for £10.">
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHLYP9Q4HK"></script>
+    <!-- Google Analytics with Consent Mode v2 (default denied until user accepts) -->
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {
+            analytics_storage:  'denied',
+            ad_storage:         'denied',
+            ad_user_data:       'denied',
+            ad_personalization: 'denied',
+            wait_for_update:    500
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHLYP9Q4HK"></script>
+    <script>
         gtag('js', new Date());
         gtag('config', 'G-BHLYP9Q4HK');
     </script>
@@ -734,6 +743,7 @@
             <a href="mailto:hello@foulplay.games">Contact</a>
             <a href="#faq">FAQ</a>
             <a href="https://shop.foulplay.games">Buy Now</a>
+            <a href="/privacy.html">Privacy Policy</a>
         </div>
         <p class="footer-text">© 2025 Global Soccer Trophy Quiz Cup. All rights reserved.</p>
         <p class="footer-text">hello@foulplay.games</p>
@@ -744,5 +754,6 @@
             <div class="bar-cyan"></div>
         </div>
     </footer>
+    <script src="/cookie-consent.js"></script>
 </body>
 </html>

@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase Successful! — Your Game Code</title>
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHLYP9Q4HK"></script>
+    <!-- Google Analytics with Consent Mode v2 -->
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {
+            analytics_storage:  'denied',
+            ad_storage:         'denied',
+            ad_user_data:       'denied',
+            ad_personalization: 'denied',
+            wait_for_update:    500
+        });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BHLYP9Q4HK"></script>
+    <script>
         gtag('js', new Date());
         gtag('config', 'G-BHLYP9Q4HK');
     </script>
@@ -233,5 +242,6 @@
             copyBtn.style.display = 'none';
         }
     </script>
+    <script src="/cookie-consent.js"></script>
 </body>
 </html>
