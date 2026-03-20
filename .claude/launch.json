@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Node static server",
+      "runtimeExecutable": "/Users/jordan.kennard/.nvm/versions/node/v24.14.0/bin/node",
+      "runtimeArgs": ["/Users/jordan.kennard/Documents/Wcgqs Website/serve.js"],
+      "port": 3000
+    }
+  ]
+}
